@@ -32,12 +32,14 @@ public class FragmentCurrent extends Fragment {
     private String key = "1df044d666454695ae8121458162711";
     View v;
     String place;
+    String displayPlace;
 
-    public static FragmentCurrent newInstance(String pl) {
+    public static FragmentCurrent newInstance(String p1,String p2) {
         FragmentCurrent myFragment = new FragmentCurrent();
 
         Bundle args = new Bundle();
-        args.putString("name",pl);
+        args.putString("name",p1);
+        args.putString("pname",p2);
         myFragment.setArguments(args);
 
         return myFragment;
@@ -49,8 +51,9 @@ public class FragmentCurrent extends Fragment {
         v= inflater.inflate(R.layout.fragment_current_weather, container, false);
         Bundle args = getArguments();
         place = args.getString("name");
+        displayPlace = args.getString("pname");
         TextView placetv= (TextView) v.findViewById(R.id.curent_place);
-        placetv.setText("Location: "+place);
+        placetv.setText("Location: "+displayPlace);
         return v;
     }
 

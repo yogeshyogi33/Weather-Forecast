@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                Toast.makeText(getApplicationContext(), placesList.get(i), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
-                intent.putExtra("name", placesList.get(i));
+                intent.putExtra("name", placesList.get(i).split(" ")[0]);
+                intent.putExtra("pname", placesList.get(i));
                 startActivity(intent);
             }
         });
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = new JSONArray(s);
                     placesList.clear();
+                    if(jsonArray.length()==0)
+                        Toast.makeText(getApplicationContext(),"Location not found", Toast.LENGTH_LONG).show();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         placesList.add(object.getString("name"));
